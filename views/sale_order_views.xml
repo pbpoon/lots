@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="lot_inherit_view_sale_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//field[@name='order_line']/tree" position="attributes">-->
+                <!--<attribute name="editable"/>-->
+                <!--</xpath>-->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('package_list_visible', '=', True)]}</attribute>
+                        </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="part"/>
+                    <field name="qty"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="lot_id" attrs="{'readonly':[('id','!=',False)]}"/>
+                    <field name="package_list_visible" invisible="1"/>
+
+                    <button name="action_show_package_list" string="Register lots, packs, location" type="object"
+                            icon="fa-list" attrs="{'invisible': [('package_list_visible', '=', False)]}"
+                            options='{"warn": true}'/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('id','!=',False)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!--<record id="sale_order_package_list_form_view" model="ir.ui.view">-->
+        <!--<field name="name">sale.order.package.list.form</field>-->
+        <!--<field name="model">package.list</field>-->
+        <!--<field name="arch" type="xml">-->
+        <!--<form>-->
+        <!---->
+        <!--</form>-->
+        <!--</field>-->
+        <!--</record>-->
+
+    </data>
+
+</odoo>

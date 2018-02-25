@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_create_order_form">
+            <field name="name">purchase order form view</field>
+            <field name="model">product.create.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_done" type="object" string="Done"
+                                attrs="{'invisible':['|',('state','=','done'),('state','=','cancel')]}"/>
+                        <button name="action_confirm" type="object" string="Confirm"
+                                attrs="{'invisible':[('state','=','done')]}"/>
+                        <button name="action_draft" type="object" string="Draft"
+                                attrs="{'invisible':[('state','=','draft')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="Draft,Confirm,Done"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_create_purchase_order" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                            </button>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="cost_by"/>
+                                <field name="total_count"/>
+                                <field name="total_weight"/>
+                            </group>
+                            <h3>明细行采取统一资料</h3>
+                            <h3>..</h3>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="quarry_id"/>
+                                <field name="batch_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="订单明细行">
+                                <field name="order_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="product_id" invisible="1"/>
+                                        <field name="weight"/>
+                                        <field name="m3"/>
+                                        <field name="long"/>
+                                        <field name="width"/>
+                                        <field name="height"/>
+                                        <field name="unit_price"/>
+                                        <field name="batch_id"/>
+                                        <field name="quarry_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="purchase_product_create_order_action_window">
+            <field name="name">purchase window</field>
+            <field name="res_model">product.create.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="导入采购尺码单" id="product_create_order_list" parent="purchase.menu_procurement_management"
+                  action="purchase_product_create_order_action_window"/>
+    </data>
+</odoo>

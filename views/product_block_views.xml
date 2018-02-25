@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+        <menuitem name="Product Block" id="product_block_sale" parent="sale.sale_menu_root"/>
+        <!--<menuitem name="product block" id="product_block_sale_sidebar" parent="sale.product_menu_catalog" sequence="2"/>-->
+
+        <record id="product_block_form_view" model="ir.ui.view">
+            <field name="name">荒料编号明细</field>
+            <field name="model">product.block</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_show_all_slab" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="all_slab_qty"/>
+                            </button>
+                            <button name="action_show_available_slab" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="available_slab_qty"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <group>
+                                <field name="quarry_id"/>
+                                <field name="batch_id"/>
+                            </group>
+                        </div>
+
+                        <notebook>
+                            <page string="资料">
+                                <group>
+                                    <group>
+                                        <field name="weight"/>
+                                        <field name="m3"/>
+                                        <field name="SG"/>
+                                        <div class="oe_inline">
+                                            <label for="ratio"/>
+                                            <field name="ratio"/>
+                                            <field name="ratio_uom"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="long"/>
+                                        <field name="width"/>
+                                        <field name="height"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="成本价值">
+                                <group>
+                                    <group>
+                                        <field name="cost_by"/>
+                                        <field name="cost_unit_price"/>
+                                    </group>
+                                    <group>
+                                        <field name="cost_qty"/>
+                                        <field name="cost_uom"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="库存作业事务">
+                                事务记录....
+                            </page>
+                            <page string="销售记录">
+                                销售记录...
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_block_action_view" model="ir.actions.act_window">
+            <field name="name">荒料编号资料</field>
+            <field name="res_model">product.block</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    </data>
+</odoo>

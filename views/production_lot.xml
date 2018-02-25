@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <!--<record id="lot_inherit_view_production_lot_tree" model="ir.ui.view">-->
+            <!--<field name="name">production.lot.tree</field>-->
+            <!--<field name="model">stock.production.lot</field>-->
+            <!--<field name="inherit_id" ref="stock.view_production_lot_tree"/>-->
+            <!--<field name="arch" type="xml">-->
+                    <!--<field name="name" position="after">-->
+                        <!--<field name="product_block_id"/>-->
+                        <!--<field name="part_num"/>-->
+                        <!--<field name="default_sequence"/>-->
+                    <!--</field>-->
+            <!--</field>-->
+        <!--</record>-->
+
+        <record id="lot_inherit_view_production_lot_form" model="ir.ui.view">
+            <field name="name">production.lot.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                     <xpath expr="//group[@name='main_group']" position="inside">
+                        <group>
+                            <field name="product_block_id"/>
+                        </group>
+                    </xpath>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

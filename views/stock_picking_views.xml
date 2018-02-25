@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+        <!--move_line-->
+        <record id="lot_inherit_view_stock_move_line_operation_tree" model="ir.ui.view">
+            <field name="name">stock.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='qty_done']" position="before">
+                    <field name="package_list_visible" invisible="1"/>
+
+                    <field name="part"/>
+
+                </xpath>
+                <xpath expr="//tree/field[@name='qty_done']" position="after">
+                    <field name="qty"/>
+                    <button name="action_show_package_list" string="Register lots, packs, location" type="object"
+                            icon="fa-list" attrs="{'readonly':[('state', 'in', ('done','cancel'))]}"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='qty_done']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('package_list_visible', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!--move-->
+        <record id="lot_inherit_view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_lines']/tree/field[@name='product_id']" position="before">
+                    <field name="package_list_visible" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//field[@name='move_lines']/tree/field[@name='product_id']" position="after">
+                    <field name="lot_id"/>
+                    <!--<field name="package_list_id"/>-->
+                    <button name="action_show_package_list" string="Register lots, packs, location" type="object"
+                            icon="fa-list" options='{"warn": true}' attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                    <field name="part"/>
+                </xpath>
+                <xpath expr="//field[@name='move_lines']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="qty"/>
+                    <field name="uom"/>
+                </xpath>
+                <xpath expr="//field[@name='move_lines']/tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('package_list_visible', '=', True)]}</attribute>
+
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+
+</odoo>

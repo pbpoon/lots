@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="lot_inherit_purchase_order_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="lot_id"/>
+                    <field name="qty"/>
+                </xpath>
+                <xpath expr="//field[@name='is_shipped']" position="after">
+                    <field name="import_product_line_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

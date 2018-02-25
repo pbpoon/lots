@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="lot_inherit_product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="石材产品">
+                        <group>
+                            <field name="product_stone_type" widget="radio"/>
+                            <field name="uom"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>
